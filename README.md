@@ -1,2 +1,2 @@
-# codeforge
-a full-stack website made with nextjs, tailwind and typescript on the frontend and basically django on the back with the purpose of being a codepen clone
+# notemaker
+A challenge that is based on creating a simple notepad, for creating and storing notes using django, postgres, nextjs and tailwind.
