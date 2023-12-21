@@ -1,0 +1,17 @@
+*.pyc
+.idea
+.vscode
+*/*.pyc
+*/*/*.pyc
+*/static/admin
+*/static/admin_interface
+*/static/ckeditor
+*/static/rest_framework
+*/static/streamfield
+/__pycache__
+src/src_config/__pycache__/*.pyc
+.DS_Store
+.env
+**/.DS_Store
+src/src_config/local_settings.py
+src/media
