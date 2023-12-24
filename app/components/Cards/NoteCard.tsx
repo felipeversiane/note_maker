@@ -25,26 +25,34 @@ const NoteCard: React.FC<CardProps> = ({id,title,content}) => {
   
     const handleEdit = (id:number) => {
       console.log('Editando...'+ id);
+      toggleMenu();
     };
-  
+    const closeOutsideModal = (e) => {
+      if (e.target.classList.contains('backdrop')) {
+        toggleModal();
+      }
+    };
     const handleDelete = (id:number) => {
       console.log('Excluindo...'+id);
+      toggleMenu();
     };
   return (
-    <div className="max-w-xs rounded-xl overflow-hidden shadow-xl m-10 cursor-pointer w-[278px] h-[201px] z-0"onClick={handleView}>
-       {showModal && (
-         <div className="fixed top-0 left-0 z-50 w-screen h-screen flex items-center justify-center">
-         <div className="absolute top-0 left-0 w-full h-full backdrop-filter backdrop-blur-lg bg-gray-300 bg-opacity-30 flex items-center justify-center">
+    <>
+     {showModal && (
+         <div className="fixed top-0 left-0 z-50 w-screen h-screen flex items-center justify-center bg-transparent">
+         <div className="absolute top-0 left-0 w-full h-full backdrop-filter backdrop-blur-md bg-transparent bg-opacity-30 flex items-center justify-center backdrop" onClick={closeOutsideModal}>
            <div className="z-50 bg-white p-6 rounded-md overflow-y-auto w-[47rem] h-[35rem] shadow-xl">
-             <h2 className="text-xl font-bold mb-4">{title}</h2>
+             <h2 className="text-xl font-semibold mb-4">{title}:</h2>
+             <hr className="my-4 border-t border-gray-400"/>
              <p className="text-gray-700">{content}</p>
            </div>
          </div>
        </div>
      )}
+    <div className="max-w-xs rounded-xl overflow-hidden shadow-xl cursor-pointer w-[278px] h-[201px] z-0 hover:shadow-zinc-300 transition-all duration-300 "onClick={handleView}>
       <div className="px-6 py-4">
         <div className="flex justify-between items-center z-0">
-          <h3 className="font-bold text-xl mb-2">{title}</h3>
+          <h3 className="font-semibold text-xl mb-2">{title}</h3>
           <div className="relative">
             <button onClick={(e) => { e.stopPropagation(); toggleMenu(); }} className="focus:outline-none px-1 py-1">
               <Image
@@ -92,6 +100,7 @@ const NoteCard: React.FC<CardProps> = ({id,title,content}) => {
         </p>
       </div>
     </div>
+    </>
   );
 };
 export default NoteCard;

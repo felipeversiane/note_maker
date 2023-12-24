@@ -14,4 +14,6 @@ def validate_letters(name):
 def validate_value(value):
     if value <= 0:
         raise ValidationError(_("Somente valores positivos."))
+    
+
         

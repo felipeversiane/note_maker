@@ -10,5 +10,6 @@ router.register(r'note', views.NoteViewSet)
 
 urlpatterns = [
     re_path('', include(router.urls)),
-    
+    path('person/<str:name>/<int:age>/', views.get_person_by_name_and_age, name='get_person_by_name_and_age'),
+
 ]

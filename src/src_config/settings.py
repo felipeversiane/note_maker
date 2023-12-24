@@ -1,5 +1,4 @@
 import os
-from typing import List
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -13,7 +12,8 @@ SECRET_KEY = 's_-aro!sw@)bob$t8jdq!s61$+3s82y=dbe!b5y3!p4ch&y3k#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS: List[str] = ['*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'web']
+
 
 
 # Application definition
@@ -26,16 +26,12 @@ PREREQUISITE_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'drf_yasg',
     'corsheaders',
-    'rolepermissions',
     'simple_history',
     'auditlog',
     'rest_framework',
     'rest_framework_simplejwt',
     'celery',
-    'bootstrap5',
-    'filebrowser',
 ]
 
 PROJECT_APPS = [
@@ -48,12 +44,13 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'src_config.urls'
@@ -69,18 +66,22 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-            ],
-            'builtins': [
-                'src_config.filters'
-            ]
+            ], 
         },
     },
 ]
 
 WSGI_APPLICATION = 'src_config.wsgi.application'
 
-CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True
+
+
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+)
+
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -114,12 +115,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator', # noqa : E501
     },
 ]
-# Add Role Permissions "Cargos"
-ROLEPERMISSIONS_MODULE = 'src_config.roles'
-
-ROLEPERMISSIONS_REDIRECT_TO_LOGIN = True
-
-ROLEPERMISSIONS_REGISTER_ADMIN = True
 
 # django admin interface template
 
@@ -133,9 +128,6 @@ LANGUAGES = (
     ('pt-br', u'Português'),
     ('en', u'Inglês'),
 )
-LOCALE_PATHS = [
-    BASE_DIR / 'locale',
-]
 
 LANGUAGE_CODE = 'pt-br'
 USE_I18N = True
