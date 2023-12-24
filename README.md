@@ -5,6 +5,5 @@ docker-compose build e docker-compose up para iniciar o aplicativo.
 
 Caso esteja dando erro na imagem do nextjs, inicie a aplicação nextjs manualmente, atraves da pasta "app" , com o seguinte comando "npm i" e logo após "npm run dev"
 
-
-
+Lembre-se de fazer as migrações para que funcione as requisicoes.
 
