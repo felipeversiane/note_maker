@@ -3,12 +3,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 interface CardProps {
-  id: number;
+  url: string;
   title: string;
   content: string;
 }
 
-const NoteCard: React.FC<CardProps> = ({id,title,content}) => {
+const NoteCard: React.FC<CardProps> = ({url,title,content}) => {
     const [showMenu, setShowMenu] = useState(false);
     const [showModal, setShowModal] = useState(false);
 
@@ -23,7 +23,7 @@ const NoteCard: React.FC<CardProps> = ({id,title,content}) => {
       setShowMenu(!showMenu);
     };
   
-    const handleEdit = (id:number) => {
+    const handleEdit = (id:string) => {
       console.log('Editando...'+ id);
       toggleMenu();
     };
@@ -32,7 +32,7 @@ const NoteCard: React.FC<CardProps> = ({id,title,content}) => {
         toggleModal();
       }
     };
-    const handleDelete = (id:number) => {
+    const handleDelete = (id:string) => {
       console.log('Excluindo...'+id);
       toggleMenu();
     };
@@ -65,7 +65,7 @@ const NoteCard: React.FC<CardProps> = ({id,title,content}) => {
               {showMenu && (
                 <ul className="absolute right-0 mt-2 py-2 w-40 bg-white border rounded shadow-md z-10">
                   <li
-                    onClick={(e) => { e.stopPropagation(); handleEdit(id); }}
+                    onClick={(e) => { e.stopPropagation(); handleEdit(url); }}
                     className="px-4 py-2 mr-4 ml-4 rounded-lg hover:bg-gray-200 cursor-pointer flex justify-between"
                   >
                     <p className="flex items-center bg-inherit">Editar</p>
@@ -78,7 +78,7 @@ const NoteCard: React.FC<CardProps> = ({id,title,content}) => {
                     />
                   </li>
                   <li
-                    onClick={(e) => { e.stopPropagation(); handleDelete(id); }}
+                    onClick={(e) => { e.stopPropagation(); handleDelete(url); }}
                     className="px-4 py-2 mr-4 ml-4 rounded-lg hover:bg-gray-200 cursor-pointer flex justify-between"
                   >
                     <p className="flex items-center bg-inherit">Excluir</p>

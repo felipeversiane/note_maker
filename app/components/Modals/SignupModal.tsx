@@ -2,7 +2,8 @@ import React, {useState } from 'react';
 import Image from 'next/image';
 
 const SignupModal = ({ showSignupModal, toggleSignupModal }) => {
-  
+  const [errorMessage, setErrorMessage] = useState('');
+
   const [formData, setFormData] = useState({
     name: '',
     age: '',
@@ -29,10 +30,6 @@ const SignupModal = ({ showSignupModal, toggleSignupModal }) => {
     }
   };
 
-  // const handleSubmit = async (e) => {
-  //     toggleSignupModal();
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -54,7 +51,9 @@ const SignupModal = ({ showSignupModal, toggleSignupModal }) => {
                 const id = data.id;
                 toggleSignupModal(id);
               });
-            } else {
+            } else if (postResponse.status === 400) {
+              setErrorMessage('Nome já existente');
+            }else {
               console.log('Erro ao criar nova pessoa:', postResponse.status);
             }
           })
@@ -84,9 +83,12 @@ const SignupModal = ({ showSignupModal, toggleSignupModal }) => {
       <div className="fixed top-0 left-0 z-50 w-screen h-screen flex items-center justify-center bg-transparent">
         <div className="absolute top-0 left-0 w-full h-full backdrop-filter backdrop-blur-md bg-transparent bg-opacity-30"></div>
         <div className="z-50 bg-white shadow-xl p-6 rounded-md max-w-[47rem] w-[47rem] h-[35rem] overflow-auto">
-          <div className="title w-full h-[10%] flex justify-center items-center">
+          <div className="title w-full h-[5%] flex justify-center items-center">
             <h1 className="text-3xl ">Novo por aqui ? Logue ou Cadastre-se ...</h1>
           </div>
+          {errorMessage && (
+          <div className=" h-[1%] flex justify-center items-center w-full text-red-500 text-center mt-4">{errorMessage}</div>
+        )}
           <form onSubmit={handleSubmit} className="w-full h-[90%] p-10">
             <div className="mb-4 w-full h-[25%] flex justify-center items-start flex-col">
               <label htmlFor="name" className="text-black font-semibold text-xl bg-transparent">

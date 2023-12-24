@@ -6,7 +6,7 @@ from .PersonModel import Person
 
 class Note(models.Model):
 
-    title = models.CharField(max_length=100,verbose_name="Title",null=False,blank=False,validators=[validate_first_letter])
+    title = models.CharField(max_length=100,verbose_name="Title",null=False,blank=True,validators=[validate_first_letter])
     content = models.TextField(max_length=2000,verbose_name="Content",null=False,blank=True)
     creator = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='Notes')
 
@@ -20,7 +20,7 @@ class Note(models.Model):
         ordering = ['id']
     
 
-class NoteSerializer(serializers.HyperlinkedModelSerializer):
+class NoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Note
         fields = '__all__'

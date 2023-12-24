@@ -11,5 +11,6 @@ router.register(r'note', views.NoteViewSet)
 urlpatterns = [
     re_path('', include(router.urls)),
     path('person/<str:name>/<int:age>/', views.get_person_by_name_and_age, name='get_person_by_name_and_age'),
+    path('notes-by-creator/<int:creator_id>/', views.get_notes_by_creator, name='get_notes_by_creator'),
 
 ]

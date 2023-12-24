@@ -11,7 +11,7 @@ const NoteGrid = ({ notas }) => {
           notas.map((nota) => (
             <NoteCard
               key={nota.id}
-              id={nota.id}
+              url={nota.id}
               title={nota.title}
               content={nota.content}
             />

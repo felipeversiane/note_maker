@@ -8,20 +8,66 @@ import SignupModal from '../components/Modals/SignupModal';
 const Index = () => {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(true);
-
+  const [notas, setNotas] = useState([]);
+  const[creator,setCreator] = useState(0);
 
   const toggleCreateModal = () => {
     setShowCreateModal(!showCreateModal);
   };
 
-  const toggleSignupModal = (id) => {
+  const createNote = async () =>{
+    const noteData = {
+     "title":"",
+     "content":"",
+     "creator":creator
+    }
+    fetch('http://localhost:8000/api/myapp/note/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(noteData),
+        }).then((postResponse) => {
+            if (postResponse.status === 201 || postResponse.status === 200) {
+              postResponse.json().then((data) => {
+              });
+            }else {
+              console.log('Erro ao criar nota:', postResponse.status);
+            }
+          })
+          .catch((postError) => {
+            console.error('Erro ao criar nota:', postError);
+          });
+  }
+
+  const fetchNotesByCreator = async (id) => {
+    const url = `http://localhost:8000/notes-by-creator/${id}/`;
+  
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Erro ao obter as notas');
+      }
+  
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Erro:', error);
+      return [];
+    }
+  };
+  
+
+  const toggleSignupModal = async (id) => {
     setShowSignupModal(!showSignupModal);
+    setCreator(id);
     if(id){
-      
+      const notes = await fetchNotesByCreator(id);
+      setNotas(notes);
     }
   };
 
-  const notas = []; 
+
 
   return (
     <MainLayout title='NoteMaker'>
