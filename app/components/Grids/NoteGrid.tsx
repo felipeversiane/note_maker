@@ -1,6 +1,6 @@
 import NoteCard from '../Cards/NoteCard';
 
-const NoteGrid = ({ notas }) => {
+const NoteGrid = ({ notas,fetchNotesByCreator}) => {
     return (
       <div className="w-full h-[85%] overflow-auto grid grid-cols-3 gap-6 pb-10 px-5">
         {notas.length === 0 ? (
@@ -11,9 +11,11 @@ const NoteGrid = ({ notas }) => {
           notas.map((nota) => (
             <NoteCard
               key={nota.id}
-              url={nota.id}
+              id={nota.id}
               title={nota.title}
               content={nota.content}
+              creator={nota.creator}
+              fetchNotesByCreator={fetchNotesByCreator}
             />
           ))
         )}

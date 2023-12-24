@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const CreateModal = ({showCreateModal,toggleCreateModal}) => {
+const CreateModal = ({showCreateModal,togglePutModal}) => {
     const [newNote, setNewNote] = useState({ title: '', content: '' });
 
     const handleInputChange = (e) => {
@@ -33,15 +33,10 @@ const CreateModal = ({showCreateModal,toggleCreateModal}) => {
     
       const closeOutsideModal = (e) => {
         if (e.target.classList.contains('backdrop')) {
-          toggleCreateModal();
+          togglePutModal(newNote);
+          setNewNote({ title: '', content: '' });
+
         }
-      };
-    
-      const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('Nova nota:', newNote);
-        setNewNote({ title: '', content: '' });
-        toggleCreateModal();
       };
     return (
       <>
@@ -52,7 +47,7 @@ const CreateModal = ({showCreateModal,toggleCreateModal}) => {
               onClick={closeOutsideModal}
             ></div>
             <div className="z-50 bg-white shadow-xl p-6 rounded-md max-w-[47rem] w-[47rem] h-[35rem] overflow-auto">
-              <form onSubmit={handleSubmit}>
+              <form>
                 <div className="mb-4">
                   <input
                     type="text"

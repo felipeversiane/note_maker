@@ -31,50 +31,44 @@ const SignupModal = ({ showSignupModal, toggleSignupModal }) => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-
+    e.preventDefault();
+  
     const name = formData.name;
     const age = formData.age;
     const url = `http://localhost:8000/person/${name}/${age}/`;
-    fetch(url)
-    .then((response) => {
-      if (response.status === 404) {
-        fetch('http://localhost:8000/api/myapp/person/', {
+  
+    try {
+      const response = await fetch(url);
+  
+      if (response.ok) {
+        const data = await response.json();
+        const id = data.id;
+        toggleSignupModal(id);
+      } else if (response.status === 404) {
+        const postResponse = await fetch('http://localhost:8000/api/myapp/person/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(formData),
-        }).then((postResponse) => {
-            if (postResponse.status === 201 || postResponse.status === 200) {
-              postResponse.json().then((data) => {
-                const id = data.id;
-                toggleSignupModal(id);
-              });
-            } else if (postResponse.status === 400) {
-              setErrorMessage('Nome já existente');
-            }else {
-              console.log('Erro ao criar nova pessoa:', postResponse.status);
-            }
-          })
-          .catch((postError) => {
-            console.error('Erro ao criar nova pessoa:', postError);
-          });
-      } else if (response.status === 200) {
-        response.json().then((data) => {
-          const id = data.id; 
-          toggleSignupModal(id);
         });
+  
+        if (postResponse.ok) {
+          const postData = await postResponse.json();
+          toggleSignupModal(postData.id);
+        } else if (postResponse.status === 400) {
+          setErrorMessage('Nome já existente');
+        } else {
+          console.error('Erro ao criar nova pessoa:', postResponse.status);
+        }
       } else {
-        console.log('Erro inesperado:', response.status);
+        console.error('Erro inesperado:', response.status);
       }
-    }
-    )
-    .catch((error) => {
+    } catch (error) {
       console.error('Erro:', error);
-    });
-};
-
+    }
+  };
+  
 
   
 
