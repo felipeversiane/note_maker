@@ -106,7 +106,7 @@ const NoteCard: React.FC<CardProps> = ({id,title,content,creator, fetchNotesByCr
     <div className="max-w-xs rounded-xl overflow-hidden shadow-xl cursor-pointer w-[278px] h-[201px] z-0 hover:shadow-zinc-300 transition-all duration-300 "onClick={handleView}>
       <div className="px-6 py-4">
         <div className="flex justify-between items-center z-0">
-          <h3 className="font-semibold text-xl mb-2">{title}</h3>
+          <h3 className="font-semibold text-xl mb-2 overflow-hidden line-clamp-1">{title}</h3>
           <div className="relative">
             <button onClick={(e) => { e.stopPropagation(); toggleMenu(); }} className="focus:outline-none px-1 py-1">
               <Image

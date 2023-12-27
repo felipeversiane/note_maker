@@ -37,17 +37,19 @@ services:
     networks:
       - djangonetwork
   app:
-    build:
-      context: .
-      dockerfile: compose/nextjs/Dockerfile
+    build: 
+      context: ./app
+      dockerfile: ../compose/nextjs/Dockerfile
     container_name: az02
+    command: npm run dev
     volumes:
       - ./app:/app
-    command: npm run dev
     ports:
       - "3000:3000"
+    environment:
+      NODE_ENV: development
     networks:
-      - djangonetwork      
+      - djangonetwork
   db:
     build:
       context: .
