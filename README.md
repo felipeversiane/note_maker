@@ -10,7 +10,7 @@ For the front-end:
 - TailwindCSS
 - Typescript.
 
-For the backend and infra:
+For the back-end and infra:
 
 - Redis 
 - NGINX 
