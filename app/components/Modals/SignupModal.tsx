@@ -7,7 +7,6 @@
     const [formData, setFormData] = useState({
       name: '',
       age: '',
-      agreeTerms: false,
     });
 
     const handleChange = (e) => {
@@ -111,19 +110,6 @@
                   onChange={handleAgeChange}
                   className="w-full text-black text-xl font-thin focus:shadow-2xl transition-all duration-300 rounded-md placeholder-opacity-100 outline-none bg-transparent px-3 py-2 focus:outline-none"
                 />
-              </div>
-              <div className="mb-4 w-full h-[25%] flex justify-start items-center">
-                <input
-                  type="checkbox"
-                  id="agreeTerms"
-                  name="agreeTerms"
-                  checked={formData.agreeTerms}
-                  onChange={handleChange}
-                  className="mr-2"
-                />
-                <label htmlFor="agreeTerms" className="text-gray-700">
-                  Concordo com os termos e condições
-                </label>
               </div>
               <div className="w-full flex justify-end items-center">
                 <button
