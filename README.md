@@ -1,9 +1,25 @@
-# notemaker
-Um desafio que se baseia na criação de um bloco de notas simples, para criar e armazenar notas usando django, postgres, nextjs e tailwind.
 
-docker-compose build e docker-compose up para iniciar o aplicativo.
+# NoteMaker
 
-Caso esteja dando erro na imagem do nextjs, inicie a aplicação nextjs manualmente, atraves da pasta "app" , com o seguinte comando "npm i" e logo após "npm run dev"
+A challenge that is based on creating a simple notebook, with a basic crud made with requests via restful api.
 
-Lembre-se de fazer as migrações para que funcione as requisicoes.
+## Stack
+
+**Front-end:** Nextjs, TailwindCSS, Typescript.
+
+**Back-end/Infra:** Redis, NGINX, Postgres, Django, Django Rest Framework
+
+## Build and Run
+Use the following command to build and run the application
+
+`docker-compose build` and `docker-compose up`
+to start the application.
+
+If you are getting an error in the nextjs image, start the nextjs application manually, through the "app" folder, with the following command
+`npm i`
+and then
+`npm run dev`
+
+Remember to make the migrations so that it works as required.
+
 
