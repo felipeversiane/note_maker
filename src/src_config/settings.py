@@ -18,8 +18,6 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'web']
 
 # Application definition
 PREREQUISITE_APPS = [
-    'admin_interface',
-    'colorfield',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -29,7 +27,6 @@ PREREQUISITE_APPS = [
     'corsheaders',
     'auditlog',
     'rest_framework',
-    'rest_framework_simplejwt',
     'celery',
 ]
 

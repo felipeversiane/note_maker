@@ -11,8 +11,6 @@ redis==4.5.4
 sqlparse==0.4.4
 vine==5.0.0
 djangorestframework==3.13.0
-djangorestframework_simplejwt==5.2.1
-django-admin-interface==0.25.0
 Django-Persistent-Message==1.1
 django-filter==23.1
 django-auditlog==2.2.2
